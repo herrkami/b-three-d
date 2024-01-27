@@ -3,9 +3,10 @@
 // WebSocket = require('ws');
 
 const MessageType = {
-  "DATA": 1,
-  "CONFIG": 2,
-  "BACKEND_RESPONSE": 3,
+  "DATA": "D",
+  "CONFIG": "C",
+  // "RESPONSE_FROM_BACKEND": "B",
+  // "RESPONSE_FROM_FRONTEND": "F",
 }
 
 export class TCVController {
@@ -19,23 +20,63 @@ export class TCVController {
     }
     this.b_three_d_host = b_three_d_host;
     this.b_three_d_port = b_three_d_port;
-    
+
     const url = this.b_three_d_host + ':' + this.b_three_d_port + '/';
     this.socket = new WebSocket(url);
-    
+
     this.socket.addEventListener('open', function (event) {
       console.debug('TCVController connected.');
     });
-    
+
     this.socket.addEventListener('message', function (event) {
-      console.debug(`Msg:\n[${event.data}]`);
+      const raw_data = event.data;
+      const msg_type = raw_data.substring(0, 1);
+      var msg_data = raw_data.toString().substring(2);
+      // console.debug(`Msg data:\n[${msg_data}]`);
+      // console.debug(`Msg type:\n[${msg_type}]`);
+      if (msg_type === MessageType.CONFIG) {
+        var config = JSON.parse(msg_data);
+        console.log('Received config:', config);
+        // if (data === "status") {
+        //   socket.send(this.viewer_message);
+        // } else if (data === "config") {
+        //   socket.send(JSON.stringify(this.config()));
+        // }
+      }
+
+      // } else if (messageType === "D") {
+      //     output.debug("Received a new model");
+      //     this.view?.postMessage(data);
+      //     output.debug("Posted model to view");
+      //     if (this.splash) { this.splash = false }
+
+      // } else if (messageType === "S") {
+      //     output.debug("Received a config");
+      //     this.view?.postMessage(data);
+      //     output.debug("Posted config to view");
+
+      // } else if (messageType === "L") {
+      //     this.pythonListener = socket;
+      //     output.debug("Listener registered");
+      // }
+      // else if (messageType === "B") {
+      //     this.pythonListener?.send(data);
+      //     output.debug("Model data sent to the backend");
+      // }
+      // else if (messageType === "R") {
+      //     this.view?.postMessage(data);
+      //     output.debug("Backend response received.");
+      // }
+      // } catch (error) {
+      //   console.error(`Server error: ${msg}`);
+      // } 
 
       // // const f = document.getElementById("chatbox").contentDocument;
       // // let text = "";
       // const msg = JSON.parse(event.data);
       // // const time = new Date(msg.date);
       // // const timeStr = time.toLocaleTimeString();
-      
+
       // // Message structure
       // // msg.type
       // // msg.action
@@ -58,7 +99,7 @@ export class TCVController {
       // }
     });
   }
-  
+
   isConnectected() {
     if (this.socket.readyState == this.socket.OPEN) {
       return true;
@@ -70,6 +111,7 @@ export class TCVController {
   }
 
   handleDataReceived(data) {
+
     console.debug("handleDataReceived called.")
     return;
   }

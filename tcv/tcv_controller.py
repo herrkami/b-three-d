@@ -12,10 +12,10 @@ from viewer import Viewer
 from server import Server
 
 class MessageType:
-    DATA = 'D:'.endode('utf-8')
-    CONFIG = 'C:'.endode('utf-8')
-    # RESPONSE_BACKEND = 'B:'.endode('utf-8')
-    # RESPONSE_FRONTEND = 'F:'.endode('utf-8')
+    DATA = 'D:'.encode('utf-8')
+    CONFIG = 'C:'.encode('utf-8')
+    # RESPONSE_FROM_BACKEND = 'B:'.encode('utf-8')
+    # RESPONSE_FROM_FRONTEND = 'F:'.encode('utf-8')
 
 def serializer(obj):
     """Default JSON serializer."""
@@ -25,6 +25,8 @@ def serializer(obj):
         return loc_to_tq(obj)
     elif isinstance(obj, enum.Enum):
         return obj.value
+    elif isinstance(obj, dict):
+        return obj
     else:
         raise TypeError(f"Object of type {type(obj)} is not JSON serializable")
 
@@ -71,28 +73,31 @@ class Controller():
             self.server.start()
             
     def _send(self, data, message_type):
-        if not self.server.is_running():
+        if not self.server.is_running:
             self.start_server()
-        try:
-            msg = message_type + orjson.dumps(data, default=serializer)
-            log.info(f'Sending message:\n{msg}')
-            self.server.send_data_to_all_clients(msg)
-            
-        except Exception as e:
-            raise e
+        msg = message_type + orjson.dumps(data, default=serializer)
+        msg = msg.decode()
+        log.info(f'Sending message:\n{msg}')
+        self.server.send_data_to_all_clients(msg)
         
     def _on_recv(self, msg):
         log.info(f'Received message:\n[{msg}]')
         
-    def send_config(self, config):
+    def send_config(self, select='changed'):
+        config = self.viewer.get_config(select=select, format='backend')
         self._send(config, MessageType.CONFIG)
-        
-    
     
 
 if __name__ == '__main__':
+    import time
+    import numpy as np
     log.basicConfig(level=log.INFO)
     
     tcv = Controller(host='localhost', port=9678)
     tcv.start_server()
+    
+    while True:
+        tcv.viewer.display.cad_width.value = np.random.randint(0, 1000)
+        tcv.send_config('changed')
+        time.sleep(2)
     
