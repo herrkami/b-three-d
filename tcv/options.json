@@ -1,0 +1,231 @@
+{
+  "viewer": {
+    "control": {
+      "type": "str",
+      "default": "orbit",
+      "description": "Viewpoint control [\"orbit\", \"trackball\"] (use \"orbit\" for mouse)",
+      "snake_cased": "control",
+      "camel_cased": "control"
+    },
+    "axes": {
+      "type": "bool",
+      "default": false,
+      "description": "Show X-, Y-, and Z-axes",
+      "snake_cased": "axes",
+      "camel_cased": "axes"
+    },
+    "axes0": {
+      "type": "bool",
+      "default": false,
+      "description": "Show axes at [0,0,0] or at object center (target)",
+      "snake_cased": "axes0",
+      "camel_cased": "axes0"
+    },
+    "grid": {
+      "type": "[bool, bool, bool]",
+      "default": [
+        false,
+        false,
+        false
+      ],
+      "description": "Initial grid setting for all three axes",
+      "snake_cased": "grid",
+      "camel_cased": "grid"
+    },
+    "ortho": {
+      "type": "bool",
+      "default": true,
+      "description": "Use orthographic (true) or vanishing point perspective (False)",
+      "snake_cased": "ortho",
+      "camel_cased": "ortho"
+    },
+    "transparent": {
+      "type": "bool",
+      "default": false,
+      "description": "Show CAD objects transparently",
+      "snake_cased": "transparent",
+      "camel_cased": "transparent"
+    },
+    "blackEdges": {
+      "type": "bool",
+      "default": false,
+      "description": "Show edges in black and instead of edgeColor",
+      "snake_cased": "black_edges",
+      "camel_cased": "blackEdges"
+    },
+    "clipIntersection": {
+      "type": "bool",
+      "default": false,
+      "description": "Use intersection clipping",
+      "snake_cased": "clip_intersection",
+      "camel_cased": "clipIntersection"
+    },
+    "clipPlaneHelpers": {
+      "type": "bool",
+      "default": false,
+      "description": "Show clipping planes",
+      "snake_cased": "clip_plane_helpers",
+      "camel_cased": "clipPlaneHelpers"
+    },
+    "clipNormal": {
+      "type": "[[int, int, int], [int, int, int], [int, int, int]]",
+      "default": [
+        [
+          -1,
+          0,
+          0
+        ],
+        [
+          0,
+          -1,
+          0
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ],
+      "description": "Normal directions for clipping",
+      "snake_cased": "clip_normal",
+      "camel_cased": "clipNormal"
+    },
+    "ticks": {
+      "type": "int",
+      "default": 10,
+      "description": "Number of grid ticks",
+      "snake_cased": "ticks",
+      "camel_cased": "ticks"
+    },
+    "rotateSpeed": {
+      "type": "float",
+      "default": 1.0,
+      "description": "Rotation speed",
+      "snake_cased": "rotate_speed",
+      "camel_cased": "rotateSpeed"
+    },
+    "zoomSpeed": {
+      "type": "float",
+      "default": 0.5,
+      "description": "Zoom speed",
+      "snake_cased": "zoom_speed",
+      "camel_cased": "zoomSpeed"
+    },
+    "panSpeed": {
+      "type": "float",
+      "default": 0.5,
+      "description": "Pan speed",
+      "snake_cased": "pan_speed",
+      "camel_cased": "panSpeed"
+    },
+    "position": {
+      "type": "[float, float, float]",
+      "default": null,
+      "description": "Camera position [x, y, z]",
+      "snake_cased": "position",
+      "camel_cased": "position"
+    },
+    "quaternion": {
+      "type": "[float, float, float, float]",
+      "default": null,
+      "description": "Camera rotation as 4-dim quaternion array [x, y, z, w]",
+      "snake_cased": "quaternion",
+      "camel_cased": "quaternion"
+    },
+    "zoom": {
+      "type": "float",
+      "default": 1.0,
+      "description": "Camera zoom factor",
+      "snake_cased": "zoom",
+      "camel_cased": "zoom"
+    },
+    "zoom0": {
+      "type": "float",
+      "default": 1.0,
+      "description": "Initial zoom factor",
+      "snake_cased": "zoom0",
+      "camel_cased": "zoom0"
+    },
+    "tools": {
+      "type": "bool",
+      "default": true,
+      "description": "Show/hide all tools",
+      "snake_cased": "tools",
+      "camel_cased": "tools"
+    },
+    "timeit": {
+      "type": "bool",
+      "default": false,
+      "description": "Show timings in browser console",
+      "snake_cased": "timeit",
+      "camel_cased": "timeit"
+    }
+  },
+  "display": {
+    "cadWidth": {
+      "type": "int",
+      "default": 800,
+      "description": "Width of the CAD canvas",
+      "snake_cased": "cad_width",
+      "camel_cased": "cadWidth"
+    },
+    "height": {
+      "type": "int",
+      "default": 600,
+      "description": "Height of the CAD canvas",
+      "snake_cased": "height",
+      "camel_cased": "height"
+    },
+    "treeWidth": {
+      "type": "int",
+      "default": 250,
+      "description": "Width of the tree section",
+      "snake_cased": "tree_width",
+      "camel_cased": "treeWidth"
+    },
+    "theme": {
+      "type": "str",
+      "default": "light",
+      "description": "Theme [\"light\", \"dark\"]",
+      "snake_cased": "theme",
+      "camel_cased": "theme"
+    }
+  },
+  "render": {
+    "edgeColor": {
+      "type": "int",
+      "default": 7368816,
+      "description": "Default edge color in hex format",
+      "snake_cased": "edge_color",
+      "camel_cased": "edgeColor"
+    },
+    "ambientIntensity": {
+      "type": "float",
+      "default": 0.5,
+      "description": "Ambient light intensity",
+      "snake_cased": "ambient_intensity",
+      "camel_cased": "ambientIntensity"
+    },
+    "directIntensity": {
+      "type": "float",
+      "default": 0.3,
+      "description": "Direct light intensity",
+      "snake_cased": "direct_intensity",
+      "camel_cased": "directIntensity"
+    },
+    "defaultOpacity": {
+      "type": "float",
+      "default": 0.4,
+      "description": "Default opacity level in transparency mode",
+      "snake_cased": "default_opacity",
+      "camel_cased": "defaultOpacity"
+    },
+    "normalLen": {
+      "type": "float",
+      "default": 0,
+      "description": "Show triangle normals when normalLen > 0",
+      "snake_cased": "normal_len",
+      "camel_cased": "normalLen"
+    }
+  }
+}
