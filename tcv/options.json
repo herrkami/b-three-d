@@ -1,12 +1,5 @@
 {
   "viewer": {
-    "control": {
-      "type": "str",
-      "default": "orbit",
-      "description": "Viewpoint control [\"orbit\", \"trackball\"] (use \"orbit\" for mouse)",
-      "snake_cased": "control",
-      "camel_cased": "control"
-    },
     "axes": {
       "type": "bool",
       "default": false,
@@ -53,6 +46,13 @@
       "snake_cased": "black_edges",
       "camel_cased": "blackEdges"
     },
+    "collapse": {
+      "type": "int",
+      "default": 0,
+      "description": "Tree collapse level (0 .. 3)",
+      "snake_cased": "collapse",
+      "camel_cased": "collapse"
+    },
     "clipIntersection": {
       "type": "bool",
       "default": false,
@@ -90,33 +90,30 @@
       "snake_cased": "clip_normal",
       "camel_cased": "clipNormal"
     },
+    "clipSlider": {
+      "type": "[int, int, int]",
+      "default": [
+        -1,
+        -1,
+        -1
+      ],
+      "description": "Clipping slider value (will be trimmed to slider's min/max limits)",
+      "snake_cased": "clip_slider",
+      "camel_cased": "clipSlider"
+    },
+    "control": {
+      "type": "str",
+      "default": "orbit",
+      "description": "Viewpoint control [\"orbit\", \"trackball\"] (use \"orbit\" for mouse)",
+      "snake_cased": "control",
+      "camel_cased": "control"
+    },
     "ticks": {
       "type": "int",
       "default": 10,
       "description": "Number of grid ticks",
       "snake_cased": "ticks",
       "camel_cased": "ticks"
-    },
-    "rotateSpeed": {
-      "type": "float",
-      "default": 1.0,
-      "description": "Rotation speed",
-      "snake_cased": "rotate_speed",
-      "camel_cased": "rotateSpeed"
-    },
-    "zoomSpeed": {
-      "type": "float",
-      "default": 0.5,
-      "description": "Zoom speed",
-      "snake_cased": "zoom_speed",
-      "camel_cased": "zoomSpeed"
-    },
-    "panSpeed": {
-      "type": "float",
-      "default": 0.5,
-      "description": "Pan speed",
-      "snake_cased": "pan_speed",
-      "camel_cased": "panSpeed"
     },
     "position": {
       "type": "[float, float, float]",
@@ -139,6 +136,34 @@
       "snake_cased": "zoom",
       "camel_cased": "zoom"
     },
+    "panSpeed": {
+      "type": "float",
+      "default": 0.5,
+      "description": "Pan speed",
+      "snake_cased": "pan_speed",
+      "camel_cased": "panSpeed"
+    },
+    "rotateSpeed": {
+      "type": "float",
+      "default": 1.0,
+      "description": "Rotation speed",
+      "snake_cased": "rotate_speed",
+      "camel_cased": "rotateSpeed"
+    },
+    "zoomSpeed": {
+      "type": "float",
+      "default": 0.5,
+      "description": "Zoom speed",
+      "snake_cased": "zoom_speed",
+      "camel_cased": "zoomSpeed"
+    },
+    "timeit": {
+      "type": "bool",
+      "default": false,
+      "description": "Show timings in browser console",
+      "snake_cased": "timeit",
+      "camel_cased": "timeit"
+    },
     "zoom0": {
       "type": "float",
       "default": 1.0,
@@ -152,29 +177,22 @@
       "description": "Show/hide all tools",
       "snake_cased": "tools",
       "camel_cased": "tools"
-    },
-    "timeit": {
-      "type": "bool",
-      "default": false,
-      "description": "Show timings in browser console",
-      "snake_cased": "timeit",
-      "camel_cased": "timeit"
     }
   },
   "display": {
+    "theme": {
+      "type": "str",
+      "default": "light",
+      "description": "Theme [\"light\", \"dark\"]",
+      "snake_cased": "theme",
+      "camel_cased": "theme"
+    },
     "cadWidth": {
       "type": "int",
       "default": 800,
       "description": "Width of the CAD canvas",
       "snake_cased": "cad_width",
       "camel_cased": "cadWidth"
-    },
-    "height": {
-      "type": "int",
-      "default": 600,
-      "description": "Height of the CAD canvas",
-      "snake_cased": "height",
-      "camel_cased": "height"
     },
     "treeWidth": {
       "type": "int",
@@ -183,22 +201,47 @@
       "snake_cased": "tree_width",
       "camel_cased": "treeWidth"
     },
-    "theme": {
-      "type": "str",
-      "default": "light",
-      "description": "Theme [\"light\", \"dark\"]",
-      "snake_cased": "theme",
-      "camel_cased": "theme"
+    "height": {
+      "type": "int",
+      "default": 600,
+      "description": "Height of the CAD canvas",
+      "snake_cased": "height",
+      "camel_cased": "height"
+    },
+    "pinning": {
+      "type": "bool",
+      "default": false,
+      "description": "Show/hide the pinning button",
+      "snake_cased": "pinning",
+      "camel_cased": "pinning"
+    },
+    "glass": {
+      "type": "bool",
+      "default": false,
+      "description": "Enable/disable glass mode (i.e. transparent tree)",
+      "snake_cased": "glass",
+      "camel_cased": "glass"
+    },
+    "tools": {
+      "type": "bool",
+      "default": true,
+      "description": "Show/hide CAD tools",
+      "snake_cased": "tools",
+      "camel_cased": "tools"
+    },
+    "keymap": {
+      "type": "dict",
+      "default": {
+        "shift": "shiftKey",
+        "ctrl": "ctrlKey",
+        "meta": "metaKey"
+      },
+      "description": "Keymap configuration for the modifier keys",
+      "snake_cased": "keymap",
+      "camel_cased": "keymap"
     }
   },
   "render": {
-    "edgeColor": {
-      "type": "int",
-      "default": 7368816,
-      "description": "Default edge color in hex format",
-      "snake_cased": "edge_color",
-      "camel_cased": "edgeColor"
-    },
     "ambientIntensity": {
       "type": "float",
       "default": 0.5,
@@ -213,6 +256,20 @@
       "snake_cased": "direct_intensity",
       "camel_cased": "directIntensity"
     },
+    "metalness": {
+      "type": "float",
+      "default": 0.7,
+      "description": "Metalness of the CAD object",
+      "snake_cased": "metalness",
+      "camel_cased": "metalness"
+    },
+    "roughness": {
+      "type": "float",
+      "default": 0.7,
+      "description": "Roughness of the CAD object",
+      "snake_cased": "roughness",
+      "camel_cased": "roughness"
+    },
     "defaultOpacity": {
       "type": "float",
       "default": 0.4,
@@ -220,12 +277,26 @@
       "snake_cased": "default_opacity",
       "camel_cased": "defaultOpacity"
     },
+    "edgeColor": {
+      "type": "int",
+      "default": 7368816,
+      "description": "Default edge color in hex format (might be displayed in decimal here: hex(7368816) = 0x707070)",
+      "snake_cased": "edge_color",
+      "camel_cased": "edgeColor"
+    },
     "normalLen": {
       "type": "float",
       "default": 0,
       "description": "Show triangle normals when normalLen > 0",
       "snake_cased": "normal_len",
       "camel_cased": "normalLen"
+    },
+    "measureTools": {
+      "type": "bool",
+      "default": false,
+      "description": "Show/hide measurement tools",
+      "snake_cased": "measure_tools",
+      "camel_cased": "measureTools"
     }
   }
 }
