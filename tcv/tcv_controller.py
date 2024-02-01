@@ -84,7 +84,7 @@ class Controller():
         log.info(f'Received message:\n[{msg}]')
         
     def send_config(self, select='changed'):
-        config = self.viewer.get_config(select=select, format='backend')
+        config = self.viewer.get_config(select=select, format='frontend')
         self._send(config, MessageType.CONFIG)
     
 
